@@ -1,0 +1,123 @@
+\documentclass{ximera}
+
+\input{../preamble.tex}
+\usepackage{tikz-cd}
+
+\outcome{Understand Stokes' Theorem and how it can be used.}
+
+\title[Dig-In:]{Stokes' Theorem}
+
+\begin{document}
+\begin{abstract}
+Stokes' Theorem provides a computational tool for relating volumes and line integrals.
+\end{abstract}
+\maketitle
+
+Recall the second Fundamental Theorem of Calculus:
+
+\begin{theorem}[Second Fundamental Theorem of Calculus]\index{Second Fundamental Theorem of Calculus}
+  Let $f$ be continuous on $[a,b]$. If $F$ is \textbf{any}
+  antiderivative of $f$, then
+  \[
+  \int_a^b f(x)\d x = F(b)-F(a).
+  \]
+\end{theorem}
+
+This theorem in some sense says that we can compute the area over a region by evaluating another function over its end points or boundary. Stokes Theorem says the same thing. Further, Stokes theorem is a generalization of Green's Theorem.
+
+%%% This is from Dan's 2015 Notes on December 2nd
+
+
+\begin{theorem}[Second Fundamental Theorem of Calculus]\index{Second Fundamental Theorem of Calculus}
+  Let $S$ be an oriented smooth surface that is bounded by a simple, closed, smooth boundary curve $C$ with positive orientation. If $\overrightarrow{F}$ is a vector field, then
+  \[
+  \oint_C \overrightarrow{F} \cdot \d \overrightarrow{r} = \iint_S (\text{curl }\overrightarrow{F}) \cdot \overrightarrow{n} \d \sigma.
+  \]
+\end{theorem}
+
+\begin{example}
+Let $\overrightarrow{F} = < xz, xy, 3xz>$. and $C$ be the boundary of the plane $2x+y+z=2$ in the first octant.
+
+\begin{center}
+{\bf Insert picture of region here}
+\end{center}
+
+
+We'll use Stokes' Theorem to compute the circulation.
+
+\begin{explanation}
+First we need curl $\overrightarrow{F}$:
+
+    \begin{align*}
+      \text{curl} \overrightarrow{F} &= \nabla \times \overrightarrow{F} \\
+      &= <\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z}> \times <xz, xy, 3xz> \\
+      &= <\answer[given]{0}, \answer[given]{-(3z-x)},\answer[given]{y}>.
+    \end{align*}
+
+We'll project $S$ onto the $(x,y)$-plane (floor), so we want only $x$ and $y$ in $nabla\times \overrightarrow{F}$.
+
+Therefore we will project $S$ in the $\overrightarrow{p}= <\answer[given]{0}, \answer[given]{0}, \answer[given]{1}>$ unit direction.
+
+Given the curve $C$ being the boundary of $2x + y + z = 2$ in the first octant, we can find $ \nabla \times \overrightarrow{F}$ in terms of $x$ and $y$:
+
+\[
+\nabla \times \overrightarrow{F} = <\answer[given]{0}, \answer[given]{x - -6+6x+3y},\answer[given]{y}>.
+\]
+
+Since $S$ is given implicitly, we use $f = \answer{2x  +y + z - 2}$ to find $\overrightarrow{n} \d \sigma$:
+
+    \begin{align*}
+      \overrightarrow{n} \d \sigma &= \nabla \times \overrightarrow{F} \\
+      &= \underbrace{\frac{\nabla f}{|\nabla f|}}_{{\color{red} \overrightarrow{n}}} \underbrace{\frac{|\nabla f|}{|\nabla f \cdot \overrightarrow{p}|} \d x \d y}_{{\color{red} \d \sigma}}\\
+      &= <\answer[given]{2}, \answer[given]{1},\answer[given]{1}> \d x \d y.
+    \end{align*}
+
+{\bf Insert projection of Region onto the xy-plane}
+
+The equation of the line bounding the projection of $S$ onto the $xy$-plane is $y = \answer[given]{2 - 2x}$, and in terms of $y$ is $x = \answer[given]{-0.5y + 1}$.
+
+Using Stokes Theorem, we see the the circulation of $\overrightarrow{F}$ is 
+
+    \begin{align*}
+      \oint_C \overrightarrow{F} \cdot \d \overrightarrow{r} &= \iint_S (\nabla \times \overrightarrow{F}) \cdot \overrightarrow{n} \d \sigma \\
+      &= \int_{\answer[given]{0}}^{\answer[given]{2}} \int_{\answer[given]{0}}^{\answer[given]{-0.5y + 1}} <0, -6 + 7x + 3y, y> \cdot <2,1,1> \d x \d y \\
+      &=\answer[given]{-1}
+    \end{align*}
+\end{explanation}
+\end{example}
+
+
+We this leads to a cute fact:
+\begin{fact}
+
+\[
+    \begin{tikzpicture}[every node/.style={midway}]
+        \matrix[column sep={14em,between origins}, row sep={2em}] at (0,0) {
+            \node(A) {$\overrightarrow{F}$ is conservative on $D$}; & \node(B) {$\overrightarrow{F} = \nabla f$ on $D$}; \\
+            \node(C) {$\oint_C \overrightarrow{F}\cdot \d \overrightarrow{r} = 0$ for all $C$ in $D$}; & \node(D) {$\nabla \times \overrightarrow{F} = \overrightarrow{0}$ on $D$}; \\
+        };
+
+        \draw[<-] (C) -- (D) node[anchor=east]{};
+        \draw[<->] (A) -- (B) node[anchor=south]{};
+        \draw[->] (B) -- (D) node[anchor=west]{};
+        \draw[<->] (A) -- (C) node[anchor=north]{};
+
+    \end{tikzpicture}
+\]
+
+\begin{explanation}
+    \begin{align*}
+      \text{curl} &= \nabla \times \overrightarrow{F} \\
+      &= <\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z}> \times <M, N, P> \\
+      &= <P_y - N_z, -(P_x - M_z), N_x - M_y>.\\
+      &= \overrightarrow{0} (\text{by the component test}).
+    \end{align*}
+\end{explanation}
+\end{fact}
+
+
+
+
+
+
+\end{document}
