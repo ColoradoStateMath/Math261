@@ -1,0 +1,56 @@
+\documentclass{ximera}
+
+\input{../preamble.tex}
+\usepackage{tikz-cd}
+
+%%\outcome{Understand Divergence Theorem and how it can be used.}
+
+\title[Dig-In:]{Connections Between Stokes' Theorem, the Divergence Theorem, and Green's Theorem}
+
+\begin{document}
+\begin{abstract}
+%%% Nothing for now
+\end{abstract}
+\maketitle
+
+%%%% Dan's Bates' Notes Dec 04 2015
+The main three theorems of these sections have a similar {\it feel}. Your intuition is correct.
+Stokes' Theorem and the Divergence Theorem are just generalizations of Green's Theorem!
+
+\begin{explanation}
+(\underline{Stokes Theorem and Green's Theorem})
+
+In 2-D, Green's Theorem says the following about Flow: 
+
+$\oint_C \overrightarrow{F} \cdot \d \overrightarrow{r} 
+= \iint_R (\nabla \times \overrightarrow{F})\cdot \overrightarrow{k} \d A$.
+
+In 3-D, Stokes Theorem says that $\oint_C \overrightarrow{F} \cdot \d \overrightarrow{r} 
+= \iint_S (\nabla \times \overrightarrow{F})\cdot \overrightarrow{n} \d \sigma$.
+\end{explanation}
+
+\begin{explanation}
+(\underline{Divergence Theorem and Green's Theorem})
+
+In 2-D, Green's Theorem says the following about Flux: 
+
+$\oint_C \overrightarrow{F} \cdot \overrightarrow{n} \d s
+= \iint_R (\nabla \cdot \overrightarrow{F})\cdot \d A$.
+
+In 3-D, the Divergence Theorem says that $\iint_S \overrightarrow{F} \cdot \d \overrightarrow{r} 
+= \iiint_D (\nabla \cdot \overrightarrow{F}) \d V$.
+
+Coincidence?..... {\bf NO WAY}!
+\end{explanation}
+
+
+\begin{theorem}[Unifying Fundamental 'Theorem']
+The integral of a differential operator acting on a vecor field over a region equals the sum of the field components appropriate to the operator over the boundary \underline{OR}
+\[
+\int_{\text{region}} (\text{some derivative stuff}) = \int_{\text{boundary}} \text{non-derivative stuff}
+\]
+\end{theorem}
+
+
+
+\end{document}

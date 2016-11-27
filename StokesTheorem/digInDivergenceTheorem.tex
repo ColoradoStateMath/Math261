@@ -1,0 +1,130 @@
+\documentclass{ximera}
+
+\input{../preamble.tex}
+\usepackage{tikz-cd}
+
+%%\outcome{Understand Divergence Theorem and how it can be used.}
+
+\title[Dig-In:]{Divergence Theorem}
+
+\begin{document}
+\begin{abstract}
+%%% Nothing for now
+\end{abstract}
+\maketitle
+
+%%%% Dan's Bates' Notes Dec 04 2015
+For flux across the boundary of a solid.
+
+\begin{definition}
+The \underline{Divergence} of a vector field $\overrightarrow{F} = <M, N, P>$ is
+
+\[
+\text{div }\overrightarrow{F} = \nabla \cdot \overrightarrow{F} = <\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z}> \cdot <M,N,P> = M_x + N_y + P_z. 
+\]
+\end{definition}
+
+\begin{theorem}[Divergence Theorem]
+\[
+\text{ Flux } = \underbrace{\iint_S \overrightarrow{F} \cdot \overrightarrow{n} \d \sigma}_{Surface Intergral}
+= \underbrace{\iiint_D \nabla\cdot \overrightarrow{F} \d V}_{triple inegral}
+\]
+where the surface $S$ is the boundary of the solid $D$.
+\end{theorem}
+
+\begin{example}
+Given a vector field $\overrightarrow{F} = <x,y,z>$ and surface $S: x^2 + y^2 + z^2 = a^2$ (a sphere of radius $a$), find the flux across $S$ in both ways.
+
+\begin{explanation}
+(\underline{Version 1: The surface integral:} $\text{ Flux } = \iint_S \overrightarrow{F} \cdot \overrightarrow{n} \d \sigma$)
+
+We first need to compute $\overrightarrow{n}$, and then $\overrightarrow{n}\cdot \overrightarrow{F}$
+
+    \begin{align*}
+     \overrightarrow{n} &= \frac{\nabla f}{|\nabla f|} \\
+    &= \frac{<2x, 2y, 2z>}{|<2x,2y,2z>|} \\
+    &= \frac{2<x,y,z>}{\sqrt{4x^2 + 4y^2 +4z^2}} \\
+    &= \frac{<x,y,z>}{\sqrt{x^2 + y^2 + z^2}} \\
+    &= <\answer[given]{x/a}, \answer[given]{y/a},     \answer[given]{z/a}>
+    \end{align*}
+
+so... 
+
+$\overrightarrow{F} \cdot \overrightarrow{n} = \answer[given]{a}$.
+
+Therefore 
+    \begin{align*}
+     \text{Flux across }S &= \iint_S \overrightarrow{F} \cdot \overrightarrow{n} \d \sigma \\
+    &= \iint_S a \d \sigma \\
+    &= a \underbrace{\iint_S \d \sigma}_{surface of sphere} \\
+    &= a(\answer[given]{4 \pi a^2}) \\
+    &= \boxed{\answer[given]{4 \pi a^3}}.
+    \end{align*}
+
+\end{explanation}
+
+\begin{explanation}
+(\underline{Version 2: The triple integral}: Flux $=  \iiint_D \nabla \cdot \overrightarrow{F} \d V$)
+
+We first need $\nabla \cdot \overrightarrow{F}$.
+
+    \begin{align*}
+     \nabla \cdot  \overrightarrow{F} &= \nabla \cdot <x,y,z> \\
+    &= \answer[given]{3}.
+    \end{align*}
+
+So to compute Flux:
+
+    \begin{align*}
+     \text{Flux across }S &= \iint_S \overrightarrow{F} \cdot \overrightarrow{n} \d \sigma \\
+    &= \iiint_D 3 \d V \\
+    &= 3 \underbrace{\iiint_D \d V}_{volume of sphere} \\
+    &= 3(\answer[given]{\frac{4}{3} \pi a^3}) \\
+    &= \boxed{4 \pi a^3}.
+    \end{align*}
+\end{explanation}
+\end{example}
+
+Therefore we have two ways to compute the same  quantity. We can choose which ways is easier and do that!
+
+\begin{example}
+Find the flux across the boundary of the unit cube of the vector field $\overrightarrow{F} = <xy,yz,xz>$.
+
+{\bf Insert picture of the unit cube here!}
+
+\begin{explanation}
+By the divergence theorem, we can compute this in two ways:
+\underline{Option 1}: $\iint_S \overrightarrow{F} \cdot \overrightarrow{n} \d \sigma$
+or \underline{Option 2}: $\iiint_D \nabla\cdot \overrightarrow{F} \d V$
+
+Just looking at the landscape, Option 1 would be doing a surface integral for 6 different faces.
+
+Option 2 on the other hand can be done in one fell swoop.
+
+    \begin{align*}
+     \iiint_D \nabla \cdot  \overrightarrow{F} &= \int_{\answer[given]{0}}^{\answer[given]{1}} \int_{\answer[given]{0}}^{\answer[given]{1}} \int_{\answer[given]{0}}^{\answer[given]{1}} (\answer[given]{x+y+z}) \d x \d y \d z \\
+     &= \int_{\answer[given]{0}}^{\answer[given]{1}} \int_{\answer[given]{0}}^{\answer[given]{1}} (\answer[given]{y + z + 0.5}) \d y \d z \\
+     &= \int_{\answer[given]{0}}^{\answer[given]{1}} (\answer[given]{z + 1})\d z\\
+     &= \answer[given]{3/2}.
+    \end{align*}
+\end{explanation}
+
+
+\end{example}
+
+
+
+
+%\begin{explanation}
+%    \begin{align*}
+%      \text{curl} &= \nabla \times \overrightarrow{F} \\
+%      &= <\frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z}> \times <M, N, P> \\
+%      &= <P_y - N_z, -(P_x - M_z), N_x - M_y>.\\
+%      &= \overrightarrow{0} (\text{by the component test}).
+%    \end{align*}
+%\end{explanation}
+
+
+
+
+\end{document}
