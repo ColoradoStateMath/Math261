@@ -1,0 +1,142 @@
+\documentclass{ximera}
+
+\input{../preamble.tex}
+
+%%\outcome{Understand Divergence Theorem and how it can be used.}
+
+\title[Dig-In:]{Changing Bounds of Surface Integrals}
+
+\begin{document}
+\begin{abstract}
+%%% Nothing for now
+\end{abstract}
+\maketitle
+
+%%% From Dan Bates' Notes Dec 07
+
+Recall the example we did earlier.
+
+\begin{example}
+Given a vector field $\overrightarrow{F} = <x,y,z>$ and surface $S: x^2 + y^2 + z^2 = a^2$ (a sphere of radius $a$), find the flux across $S$ in both ways.
+
+We found that $\overrightarrow{n} = \frac{\nabla f}{|\nabla f|} = <x/a, y/a, z/a>$ and $\overrightarrow{F}\cdot \overrightarrow{n} = a$.
+\end{example}
+
+
+Let's try this now by parameterizing $S$:
+    \begin{align*}
+     \overrightarrow{r}(\varphi, \theta) &= <x,y,z> \\
+     &= <a\sin(\varphi)\cos(\theta), a, \sin(\varphi)\sin(\theta), a\cos(\theta)>
+    \end{align*}
+    
+since $\rho = a$ for a sphere.
+
+Then $\overrightarrow{n} \d \sigma = (\overrightarrow{r}_\varphi \times \overrightarrow{r}_\theta) \d \varphi \d \theta$
+
+\begin{example}
+Consider $\oint_C \underbrace{y^2}_M \d x + \underbrace{3xy}_N \d y$  {\bf Input picture of half a bunt cake here.}
+
+Note that Green's Theorem says that following:
+    \begin{align*}
+     \underline{Work} &= \oint_C M \d x + N \d y \\
+     &= \oint_C \overrightarrow{F}\cdot \overrightarrow{T} \d s\\
+     &= \iint_R (\nabla\times \overrightarrow{F}) \cdot \overrightarrow{k} \d x \d y \\
+     &= \iint_R N_x - M_y \underbrace{\d A}_{\d x \d y}
+    \end{align*}
+And that 
+    \begin{align*}
+     \underline{Flux} &= \oint_C M \d y - N \d x \\
+     &= \iint_R N_x + M_y \d A
+    \end{align*}
+
+This gives us valuable information for computations:
+    \begin{align*}
+     \oint_C y^2 \d x + 3xy \d y &= \iint_R 3y - 2y \d A\\
+     &= \iint_R y \d A \\
+     &= \iint_R \answer[given]{ r \sin(\theta)} r \d r \d \theta \\ 
+     &= \int_{\answer[given]{0}}^{\answer[given]{\pi}} \int_{\answer[given]{1}}^{\answer[given]{2}} \answer[given]{ r^2 \sin(\theta)} \d r \d \theta \\ 
+     &= \answer[given]{14/3}
+    \end{align*}
+
+\end{example}
+
+\begin{question}
+Notice that we included $r$ with the $\d r \d \theta$. When do you include $r$ with $\d r \d \theta$?
+\begin{freeResponse}
+
+\end{freeResponse}
+\begin{feedback}
+Anytime you are switching from $\d A$ or another coordinate system into polar/cylindrical coordinates, almost always.
+
+This {\it not} the case when $r$ and $\theta$ happen to be your $u$ and $v$ (parameters) from a surface integral.
+
+This This also holds with $\rho^2\sin(\varphi)$, etc from other coordinate systems.
+\end{feedback}
+\end{question}
+
+\begin{example}
+Consider the portion of the cone $y^2 = x^2 + z^2$ from $1\leq y \leq 3$ {\bf Insert cone picture, highlighting the sort of trapezoidal strips}
+
+{\bf Insert picture of the shape's projection onto the (x,z)-plane.}
+
+Then $\overrightarrow{r}(r,\theta) = < x,y,z> =<r\cos(\theta), r, r\sin(\theta)$ where
+\[
+\answer[given]{1}\leq r \leq \answer[given]{3}
+0\leq \theta \leq \answer[given]{2\pi}
+\]
+
+Then 
+    \begin{align*}
+     \iint_S G(x,y,z) \d \sigma &= \int_0^{2\pi} \int_1^3 r\sin(\theta) | \overrightarrow{r}_r \times \overrightarrow{r}_\theta | \d r \d \theta \\
+     &= \int_0^{2\pi} \int_1^3 r\sin(\theta) (\answer[given]{2^{0.5} r})\d r \d \theta \\
+     &= \answer[given]{0}
+    \end{align*}
+\end{example}
+
+%%% Should include Dec 08 here
+
+%%% from Dec 09 notes
+
+\begin{question}
+Given the equations of the three planes
+\[
+P1: x+y+z = 4
+P2 : 2x+2y+2z=6
+P3: x-y+z=2
+\]
+and the vector equations of the two lines:
+\[
+L1: \vec{r}_1(t) = <t, 1, 3-t>
+L2: \vec{r}_2(t) = <t,t,t>
+\]
+Determine whether the following statements are true or false:
+
+$P1$ and $P2$ never intersect.
+\begin{multipleChoice}
+\choice[correct]{True}
+\choice{False}
+\end{multipleChoice}
+
+Line $L1$ is the intersection of two of the planes.
+\begin{multipleChoice}
+\choice[correct]{True}
+\choice{False}
+\end{multipleChoice}
+
+Lines $L1$ and $L2$ intersect.
+\begin{multipleChoice}
+\choice{True}
+\choice[correct]{False}
+\end{multipleChoice}
+
+Plan $P3$ and line $L2$ never intersect.
+\begin{multipleChoice}
+\choice{True}
+\choice[correct]{False}
+\end{multipleChoice}
+\end{question}
+
+
+
+
+\end{document}
